@@ -1,120 +1,162 @@
 function processInput() {
-    const input = document.getElementById("consoleInput").value;
-    let content = "";
-    switch (input) {
-      case "hello":
-        content = "<div id='output'><h1> Hello, World!</h1></div>"
-        break;
-      case "time":
-        content = "<div id='output'><h1>Dia, ano, horário e fuso horário atual</h1><p>" + new Date() + "</p></div>";
-        break;
-        content = `
-        <div id='output'>
-          <h1>Calculo do tempo de filme</h1>
-          <form>
-            <label for="filme">Qual o nome do filme? </label>
-            <input type="string" id="filme" name="filme" required>
-            <br>
-            <label for="min">Quanto tempo tem o filme em minutos? </label>
-            <input type="number" id="min" name="min" required>
-            <br>
-            <button type="button" onclick="filmes()">Calcular</button>
-          </form>  
-        </div>
-        <div id="oo"></div>
-        `
-        break;
-      case "nasc":
-        content = `
-        <div id='output'>
-          <h1>Ficha de aluno</h1>
-          <form>
-            <label for="nome">Qual o nome do aluno? </label>
-            <input type="string" id="nome" name="nome" required>
-            <br>
-            <label for="ano">Qual seu nome de nascimento? </label>
-            <input type="number" id="ano" name="ano" required>
-            <br>
-            <button type="button" onclick="ficha()">Calcular</button>
-          </form>  
-        </div>
-        <div id="oo"></div>
-        `
-        break;
-      case "produt":
-        content = `
-        <div id='output'>
-          <h1>Ficha de produto</h1>
-          <form>
-            <label for="prod">Qual o nome do produto? </label>
-            <input type="string" id="prod" name="prod" required>
-            <br>
-            <label for="prc">Qual seu preço? </label>
-            <input type="number" id="prc" name="prc" required>
-            <br>
-            <button type="button" onclick="produto()">Calcular</button>
-          </form>  
-        </div>
-        <div id="oo"></div>
-        `
-        break;
-      case "num":
-        content = `
-        <div id='output'>
-          <h1>Par ou ímpar?</h1>
-          <form>
-            <label for="nmbr">Número? </label>
-            <input type="number" id="nmbr" name="nmbr" required>
-            <br>
-            <button type="button" onclick="iop()">Calcular</button>
-          </form>  
-        </div>
-        <div id="oo"></div>
-        `
-        break;
-      case "carro":
-        content = `
-        <div id='output'>
-          <h1>Ficha de veículo</h1>
-          <form>
-            <label for="mod">Qual o modelo? </label>
-            <input type="string" id="mod" name="mod" required>
-            <br>
-            <label for="mrc">Qual sua marca? </label>
-            <input type="string" id="mrc" name="mrc" required>
-            <br>
-            <label for="prc">Qual seu preço? </label>
-            <input type="number" id="prc" name="prc" required>
-            <br>
-            <button type="button" onclick="fiat()">Calcular</button>
-          </form>  
-        </div>
-        <div id="oo"></div>
-        `
-        break;
-      default:
-        content = "<h1>Comando desconhecido</h1>";
+  const input = document.getElementById("consoleInput").value;
+  let content = "";
+  switch (input) {
+    case "hello":
+      content = "<div id='output'><h1> Hello, World!</h1></div>";
+      break;
+    case "time":
+      content = "<div id='output'><h1>Dia, ano, horário e fuso horário atual</h1><p>" + new Date() + "</p></div>";
+      break;
+    case "nasc":
+      const dataNasc = [
+        {
+          title: 'Ficha de aluno',
+          label1: 'Qual o nome do aluno?',
+          label2: 'Qual seu nome de nascimento?',
+          inputType1: 'string',
+          inputType2: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'ficha()'
+        }
+      ];
+
+      const inputs1 = dataNasc.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <label for="input2">${item.label2}</label>
+          <input type="${item.inputType2}" id="input2" name="input2" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs1}
+          </div>
+          <div id="oo"></div>
+      `;
+      break;
+    case "produt": 
+      const dataProdut = [
+        {
+          title: 'Ficha de produto',
+          label1: 'Qual o nome do produto?',
+          label2: 'Qual seu preço?',
+          inputType1: 'string',
+          inputType2: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'produto()'
+        }
+      ]
+
+      const inputs2 = dataProdut.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <label for="input2">${item.label2}</label>
+          <input type="${item.inputType2}" id="input2" name="input2" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs2}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
+    case "num":
+      const dataNum = [
+        {
+          title: 'Par ou ímpar?',
+          label1: 'Número?',
+          inputType1: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'iop()'
+        },
+      ]
+
+      const inputs3 = dataNum.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs3}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
+    case "carro":
+      const dataCarro = [
+        {
+          title: 'Ficha de veículo',
+          label1: 'Qual o modelo?',
+          label2: 'Qual sua marca?',
+          label3: 'Qual seu preço?',
+          inputType1: 'string',
+          inputType2: 'string',
+          inputType3: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'fiat()'
+        }
+      ]
+
+      const inputs4 = dataCarro.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <label for="input2">${item.label2}</label>
+          <input type="${item.inputType2}" id="input2" name="input2" required>
+          <br>
+          <label for="input3">${item.label3}</label>
+          <input type="${item.inputType3}" id="input3" name="input3" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs4}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
+    default:
+      content = "<h1>Comando desconhecido</h1>";
     }
     document.getElementById("app").innerHTML = content;
 }
-function promocao() {
-    const prod = document.getElementById("prod").value;
-    const prç = Number(document.getElementById("prç").value);
-    const pop = '<div id="output"><h2>Promoção de '+ prod +'</h2><p>Na compra de 2 unidades de '+ prod +', o total fica R$'+ Math.floor(prç)*2 + ',00.</p></div>';
-
-    document.getElementById("oo").innerHTML = pop;
-}
-function filmes() {
-    const film = document.getElementById("filme").value;
-    const min = Number(document.getElementById("min").value);
-    const pop = '<div id="output"><h2>Duração do filme</h2><p>O filme '+ film +' tem '+ Math.floor(min/60) + ' horas e ' + min%60 + ' minutos </p></div>';
-    
-    document.getElementById("oo").innerHTML = pop;
-}
 function ficha() {
-    const nome = document.getElementById("nome").value;
+    const nome = document.getElementById("input1").value;
 
-    const ano = Number(document.getElementById("ano").value);
+    const ano = Number(document.getElementById("input2").value);
 
     if ((2023-ano) >= 18) {
       const hdr = '<h2>Ficha do aluno</h2>'
@@ -133,8 +175,8 @@ function ficha() {
     }
 }
 function produto() {
-    const prod = document.getElementById("prod").value
-    const prc = Number(document.getElementById("prc").value)
+    const prod = document.getElementById("input1").value
+    const prc = Number(document.getElementById("input2").value)
 
     if (prc < 100) {
       const hdr = '<h2>Preço</h2>'
@@ -149,7 +191,7 @@ function produto() {
     }
 }
 function iop() {
-    const nmbr = Number(document.getElementById("nmbr").value)
+    const nmbr = Number(document.getElementById("input1").value)
 
     if ((nmbr%2) === 0) {
       const hdr = '<h2>Resultado!!</h2>'
@@ -164,9 +206,9 @@ function iop() {
     }
 }
 function fiat() {
-    const mod = document.getElementById("mod").value
-    const mrc = document.getElementById("mrc").value
-    const prc = Number(document.getElementById("prc").value)
+    const mod = document.getElementById("input1").value
+    const mrc = document.getElementById("input2").value
+    const prc = Number(document.getElementById("input3").value)
 
     if (mrc === "fiat"||mrc === "Fiat") {
       const hdr = '<h2>Promoção especial!!</h2>'
