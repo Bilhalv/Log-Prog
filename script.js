@@ -170,12 +170,12 @@ function fiat() {
 
     if (mrc === "fiat"||mrc === "Fiat") {
       const hdr = '<h2>Promoção especial!!</h2>'
-      const prod1 = '<div id="output">'+ hdr +'<p>Modelo: ' + mod + '</p><p>Marca: '+ mrc +'</p><p>Preço: R$' + prc + '</p><p>Desconto: R$'+ (prc*0.1) +'</p><p>Preço à vista: R$'+ (prc-(prc*0.1)) +'</p></div>'
+      const prod1 = '<div id="output">'+ hdr +'<p>Modelo: ' + mod + '</p><p>Marca: '+ mrc +'</p><p>Preço: R$' + prc + '</p><p>Desconto: R$'+ Math.floor((prc*0.1)) +'</p><p>Preço à vista: R$'+ Math.floor((prc-(prc*0.1))) +'</p></div>'
 
       document.getElementById("oo").innerHTML = prod1;
     } else {
       const hdr = '<h2>Promoção!!</h2>'
-      const prod1 = '<div id="output">'+ hdr +'<p>Modelo: ' + mod + '</p><p>Marca: '+ mrc +'</p><p>Preço: R$' + prc + '</p><p>Desconto: R$'+ (prc*0.2) +'</p><p>Preço à vista: R$'+ (prc-(prc*0.2)) +'</p></div>'
+      const prod1 = '<div id="output">'+ hdr +'<p>Modelo: ' + mod + '</p><p>Marca: '+ mrc +'</p><p>Preço: R$' + prc + '</p><p>Desconto: R$'+ Math.floor((prc*0.2)) +'</p><p>Preço à vista: R$'+ Math.floor((prc-(prc*0.2))) +'</p></div>'
 
       document.getElementById("oo").innerHTML = prod1;
     }
