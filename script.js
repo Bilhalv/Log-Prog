@@ -13,7 +13,7 @@ function processInput() {
         {
           title: 'Ficha de aluno',
           label1: 'Qual o nome do aluno?',
-          label2: 'Qual seu nome de nascimento?',
+          label2: 'Qual seu ano de nascimento?',
           inputType1: 'string',
           inputType2: 'number',
           buttonLabel: 'Calcular',
@@ -48,7 +48,7 @@ function processInput() {
         {
           title: 'Ficha de produto',
           label1: 'Qual o nome do produto?',
-          label2: 'Qual seu preço?',
+          label2: 'Qual o preço?',
           inputType1: 'string',
           inputType2: 'number',
           buttonLabel: 'Calcular',
