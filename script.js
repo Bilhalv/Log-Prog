@@ -148,6 +148,116 @@ function processInput() {
           <div id="oo"></div>
       `;
     break;
+    case "peso":
+      const datapeso = [
+        {
+          title: 'Peso ideal',
+          label1: 'Qual seu nome?',
+          label2: 'Qual seu gênero biologico?(M/F)',
+          label3: 'Qual sua altura em metros?',
+          inputType1: 'string',
+          inputType2: 'string',
+          inputType3: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'peso()'
+        }
+      ]
+
+      const inputs5 = datapeso.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <label for="input2">${item.label2}</label>
+          <input type="${item.inputType2}" id="input2" name="input2" required>
+          <br>
+          <label for="input3">${item.label3}</label>
+          <input type="${item.inputType3}" id="input3" name="input3" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs5}
+          </div>
+          <div id="oo"></div>
+      `;
+      break;
+    case "raiz":
+      const dataraiz = [
+        {
+          title: 'Verificação de raiz',
+          label1: 'Qual o número?',
+          inputType1: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'raiz()'
+        }
+      ]
+
+      const inputs6 = dataraiz.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs6}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
+    case "tri":
+      const datatri = [
+        {
+          title: 'Verificação de triângulo',
+          label1: 'Lado A:',
+          label2: 'Lado B:',
+          label3: 'Lado C:',
+          inputType1: 'number',
+          inputType2: 'number',
+          inputType3: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'tri()'
+        }
+      ]
+
+      const inputs7 = datatri.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+        <label for="input">${item.label2}</label>
+          <input type="${item.inputType2}" id="input2" name="input2" required>
+          <br>
+        <label for="input">${item.label3}</label>
+          <input type="${item.inputType3}" id="input3" name="input3" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs7}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
     default:
       content = "<h1>Comando desconhecido</h1>";
     }
@@ -221,4 +331,61 @@ function fiat() {
 
       document.getElementById("oo").innerHTML = prod1;
     }
+}
+function peso() {
+    const nom = document.getElementById("input1").value
+    const gen = document.getElementById("input2").value
+    const alt = Number(document.getElementById("input3").value)
+    let pes
+
+    switch (gen) {
+      case "F":
+      case "f":
+        pes = Math.round((62.1*alt)-44.7)
+      break
+      case "M":
+      case "m":
+        pes = Math.round((72.7*alt)-58)
+      break
+    }
+    const hdr = '<h2>Calculo do peso ideal</h2>'
+    const result = '<div id="output">'+ hdr +'<p>' + nom + ', seu peso ideal é '+ pes +'</p></div>'
+
+    document.getElementById("oo").innerHTML = result;
+}
+function raiz() {
+  const num = Number(document.getElementById("input1").value)
+  const sqrt = Math.sqrt(num)
+  let res = " "
+
+  if ((Math.round(sqrt)) != (sqrt)) {
+    res = num + " não possui raiz exata";
+  } else {
+    res = num + " possui raiz exata";
+  }
+  const hdr = '<h2>Resultado da verificação</h2>'
+  const result = '<div id="output">'+ hdr +'<p>' + res + '</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
+}
+function tri() {
+  const ld1 = Number(document.getElementById("input1").value)
+  const ld2 = Number(document.getElementById("input2").value)
+  const ld3 = Number(document.getElementById("input3").value)
+  let res = " "
+
+  if ((ld1+ld2) <= ld3 || (ld2+ld3) <= ld1 || (ld1+ld3) <= ld2 ||) {
+    res = "Os lados não podem formar um triângulo";
+  } else {
+    res = "Os lados não podem formar um triângulo";
+
+    if (ld1 == ld2 == ld3){
+      
+    }
+  }
+  
+  const hdr = '<h2>Resultado da verificação</h2>'
+  const result = '<div id="output">'+ hdr +'<p>' + res + '</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
 }
