@@ -258,6 +258,42 @@ function processInput() {
           <div id="oo"></div>
       `;
     break;
+    case "fuso":
+      const datafuso = [
+        {
+          title: 'Calculo de fuso horario',
+          label1: 'Horario no Brasil:',
+          inputType1: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'fuso()'
+        }
+      ]
+
+      const inputs8 = datafuso.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <select id="input2">
+            <option value=""> Local </option>
+            <option value="cad">Canadá</option>
+            <option value="fra">França</option>
+          </select>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs8}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
     default:
       content = "<h1>Comando desconhecido</h1>";
     }
@@ -373,19 +409,61 @@ function tri() {
   const ld2 = Number(document.getElementById("input2").value)
   const ld3 = Number(document.getElementById("input3").value)
   let res = " "
+  let tip
 
-  if ((ld1+ld2) <= ld3 || (ld2+ld3) <= ld1 || (ld1+ld3) <= ld2 ||) {
-    res = "Os lados não podem formar um triângulo";
+  if ((ld1+ld2) >= ld3 && (ld2+ld3) >= ld1 && (ld1+ld3) >= ld2) {
+      res = "Os lados podem formar um triângulo."
+      if (ld1 == ld2 && ld2 == ld3){
+        tip = "<br>Seu tipo é equilátero"
+      }
+      else if (ld1 == ld2 || ld1 == ld3 || ld2 == ld3){
+        tip = "<br>Seu tipo é isóceles"
+      }
+      else{
+        tip = "<br>Seu tipo é escalen."
+      }
+      res = res+tip
   } else {
     res = "Os lados não podem formar um triângulo";
-
-    if (ld1 == ld2 == ld3){
-      
-    }
   }
   
   const hdr = '<h2>Resultado da verificação</h2>'
-  const result = '<div id="output">'+ hdr +'<p>' + res + '</p></div>'
+  const result = '<div id="output">'+ hdr +'<p>' + res + '.</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
+}
+function fuso() {
+  let hrtd = Number(document.getElementById("input1").value)
+  let lgr = document.getElementById("input2").value
+  
+  if (lgr === "cad"){
+    hrtd = hrtd-1
+    lgr = "no Canadá"
+  } else if (lgr === "fra"){
+    hrtd = hrtd+5
+    lgr = "na França"
+  }
+
+  //Arrumando pro formato de 24h
+  if (hrtd > 24) {
+    hrtd = hrtd-24
+  }
+
+  //Separação de tarde, manha e noite
+  let cat
+  
+  if (hrtd > 12 && hrtd < 18) {
+    cat = "h da tarde"
+  } else if (hrtd < 12){
+    cat = "h da manhã"
+  } else {
+    cat = "h da noite"
+  }
+
+  hrtd = hrtd + cat
+
+  const hdr = '<h2>Resultado do fuso horário</h2>'
+  const result = '<div id="output">'+ hdr +'<p>Atualmente '+ lgr + ' é ' + hrtd + '.</p></div>'
 
   document.getElementById("oo").innerHTML = result;
 }
