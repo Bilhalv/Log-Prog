@@ -294,6 +294,66 @@ function processInput() {
           <div id="oo"></div>
       `;
     break;
+    case "saque":
+      const datasaque = [
+        {
+          title: 'Calculo de quantidade em saque',
+          label1: 'Valor do saque:R$',
+          inputType1: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'saque()'
+        }
+      ]
+
+      const inputs9 = datasaque.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs9}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
+    case "par":
+      const datapar = [
+        {
+          title: 'Calculo de numero par mais próximo',
+          label1: 'Numero:',
+          inputType1: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'par()'
+        }
+      ]
+
+      const inputs10 = datapar.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs10}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
     default:
       content = "<h1>Comando desconhecido</h1>";
     }
@@ -464,6 +524,48 @@ function fuso() {
 
   const hdr = '<h2>Resultado do fuso horário</h2>'
   const result = '<div id="output">'+ hdr +'<p>Atualmente '+ lgr + ' é ' + hrtd + '.</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
+}
+function saque() {
+  let saq = Number(document.getElementById("input1").value)
+  let fim
+
+  if ( saq > 10 && saq%5 == 0){
+    fim = `Serão necessárias ${Math.floor(saq / 10)} notas de 10 reais`
+    if (saq%10 == 5){
+      fim = fim + ` e uma nota de 5 reais`
+    }
+    fim = fim + ` para sacar o valor de R$${saq}`
+  }
+  else if ( saq == 10){
+    fim = `Será necessário uma nota de 10 reais para sacar 10 reais`
+  }
+  else{
+    fim = `Não é possivel sacar R$${saq} com as notas disponiveis`
+  }
+
+  const hdr = '<h2>Quantidade de notas</h2>'
+  const result = '<div id="output">'+ hdr +'<p>'+ fim + '.</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
+}
+function par() {
+  let num = Number(document.getElementById("input1").value)
+  let num2
+
+  if (num%2 != 0){
+    if ((Math.ceil(num))%2 == 0){
+      num2 = Math.ceil(num)
+    } else {
+      num2 = num+1
+    }
+  } else{
+    num2 = num
+  }
+
+  const hdr = '<h2>Quantidade de notas</h2>'
+  const result = '<div id="output">'+ hdr +'<p>O próximo numero par é '+ num2 + '.</p></div>'
 
   document.getElementById("oo").innerHTML = result;
 }
