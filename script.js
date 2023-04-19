@@ -354,6 +354,131 @@ function processInput() {
           <div id="oo"></div>
       `;
     break;
+    case "multa":
+      const datamulta = [
+        {
+          title: 'Calculo de multa de transito',
+          label1: 'Velocidade permitida: Km/h',
+          inputType1: 'number',
+          label2: 'Velocidade do condutor: Km/h',
+          inputType2: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'multa()'
+        }
+      ]
+
+      const inputs11 = datamulta.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+          <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+            <br>
+          <label for="input">${item.label2}</label>
+          <input type="${item.inputType2}" id="input2" name="input2" required>
+            <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs11}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
+    case "parq":
+      const dataparq = [
+        {
+          title: 'Cálculo de um parquímetro',
+          label1: 'Valor depositado: R$',
+          inputType1: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'parq()'
+        }
+      ]
+
+      const inputs12 = dataparq.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs12}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
+    case "turma":
+      const dataturma = [
+        {
+          title: 'Cálculo do numero de turmas',
+          label1: 'Nº de alunos inscritos no vestibular:',
+          inputType1: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'turma()'
+        }
+      ]
+
+      const inputs13 = dataturma.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs13}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
+    case "trim*":
+      const datatrim = [
+        {
+          title: 'Calculo de numero par mais próximo',
+          label1: 'Numero:',
+          inputType1: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'trim()'
+        }
+      ]
+
+      const inputs14 = datatrim.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+        <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+          <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputs14}
+          </div>
+          <div id="oo"></div>
+      `;
+    break;
     default:
       content = "<h1>Comando desconhecido</h1>";
     }
@@ -569,3 +694,82 @@ function par() {
 
   document.getElementById("oo").innerHTML = result;
 }
+function multa() {
+  let perm = Number(document.getElementById("input1").value)
+  let cond = Number(document.getElementById("input2").value)
+  let fim
+
+  if (perm >= cond){
+    fim = "Sem multa"
+  } else {
+    if ((perm*0.2) >= (cond-perm)){
+      fim = "Multa leve"
+    } else {
+      fim = "Multa grave"
+    }
+  }
+
+  const hdr = '<h2>Calculadora de multas</h2>'
+  const result = '<div id="output">'+ hdr +'<p>Situação: '+ fim + '</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
+}
+function parq() {
+  let valor = Number(document.getElementById("input1").value)
+  let troco = "<br>Troco: R$"
+  let fim
+
+  if (valor <  1){
+    fim = "Valor insuficiente"
+  } else {
+    let perm = "Permanência: "
+    if (valor >= 3){
+      fim = perm + "120 min" + troco + (valor-3)
+    } else if (valor >= 1.75) {
+      fim = perm + "60 min" + troco + (valor-1.75)
+    } else {
+      fim = perm + "30 min" + troco + (valor-1)
+    }
+  }
+
+  const hdr = '<h2>Parquímetro automático</h2>'
+  const result = '<div id="output">'+ hdr +'<p>'+ fim + '</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
+}
+function turma() {
+  let alu = Number(document.getElementById("input1").value)
+  let fim
+  let ne1 = "Novas turmas: "
+  let falt = "<br>Para abrir uma nova turma faltam: "
+  if (alu >= 30){
+    if (alu/30 >= 1 && alu/30 < 2) {
+      fim = `Existe uma turma nova`
+      if (alu/30 >1){
+        fim = fim+`${falt}${30-(alu-30)}`
+      }
+    } else if(alu/30 >= 2){
+      if (alu%30 != 0){
+        fim = `${ne1}${Math.floor(alu/30)}${falt}${alu%30}`
+      } else {
+        fim = `${ne1}${alu/30}`
+      }
+    }
+  } else {
+    fim = `Para abrir uma nova turma faltam: ${alu}`
+  }
+
+  const hdr = '<h2>Lorem</h2>'
+  const result = '<div id="output">'+ hdr +'<p>'+ fim + '</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
+}
+//function template() {
+//  let num = Number(document.getElementById("input1").value)
+//  let fim
+//
+//  const hdr = '<h2>Lorem</h2>'
+//  const result = '<div id="output">'+ hdr +'<p>'+ fim + '.</p></div>'
+//
+//  document.getElementById("oo").innerHTML = result;
+//}
