@@ -52,14 +52,19 @@ input {
   border-radius: 5px;
   margin: 5px 0;
 }
-select:hover,
-input:hover {
+input:hover,
+button:hover,
+select:hover{
   border-color: #909090;
+  background-color: #363636;
 }
 button:hover,
 select:hover {
   cursor: pointer;
-  border-color: #909090;
+}
+button:active,
+input:active{
+  background-color: #b3b3b3;
 }
 #text {
   display: flex;
