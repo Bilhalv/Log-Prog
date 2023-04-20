@@ -449,12 +449,16 @@ function processInput() {
           <div id="oo"></div>
       `;
     break;
-    case "trim*":
+    case "trim":
       const datatrim = [
         {
-          title: 'Calculo de numero par mais próximo',
-          label1: 'Numero:',
-          inputType1: 'number',
+          title: 'Calculo da média de um aluno',
+          label1: 'Matéria:',
+          inputType1: 'string',
+          label2: 'Nota no primeiro trimestre:',
+          inputType2: 'number',
+          label3: 'Nota no segundo trimestre:',
+          inputType3: 'number',
           buttonLabel: 'Calcular',
           functionCall: 'trim()'
         }
@@ -464,9 +468,15 @@ function processInput() {
         return `
         <h1>${item.title}</h1>
         <form>
-        <label for="input">${item.label1}</label>
+          <label for="input">${item.label1}</label>
           <input type="${item.inputType1}" id="input1" name="input1" required>
-          <br>
+            <br>
+          <label for="input">${item.label2}</label>
+          <input type="${item.inputType2}" id="input2" name="input2" required>
+            <br>
+          <label for="input">${item.label3}</label>
+          <input type="${item.inputType3}" id="input3" name="input3" required>
+            <br>
           <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
         </form>
           `;
@@ -759,17 +769,83 @@ function turma() {
     fim = `Para abrir uma nova turma faltam: ${alu}`
   }
 
-  const hdr = '<h2>Lorem</h2>'
+  const hdr = '<h2>Calculo de turmas de um vestibular</h2>'
   const result = '<div id="output">'+ hdr +'<p>'+ fim + '</p></div>'
 
   document.getElementById("oo").innerHTML = result;
 }
-//function template() {
-//  let num = Number(document.getElementById("input1").value)
-//  let fim
-//
-//  const hdr = '<h2>Lorem</h2>'
-//  const result = '<div id="output">'+ hdr +'<p>'+ fim + '.</p></div>'
-//
-//  document.getElementById("oo").innerHTML = result;
-//}
+function trim() {
+  let mat = document.getElementById("input1").value
+  let tri1 = Number(document.getElementById("input2").value)
+  let tri2 = Number(document.getElementById("input3").value)
+  let soma = tri1+tri2
+  mat = " na matéria de "+mat 
+  let fim
+
+  if (soma >= 60){
+    fim = "O aluno está passado"
+  } else if(soma >= 20){
+    fim = `O aluno precisa de ${60-soma} pontos`
+  } else {
+    fim = "O aluno está rodado"
+  }
+
+  const hdr = '<h2>Cálculo de pontos faltando de um aluno</h2>'
+  const result = '<div id="output">'+ hdr +'<p>'+ fim + mat +'.</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
+}
+
+
+// template das atividades
+/*
+
+execução do case em html
+case "temp":
+      const datatemplate = [
+        {
+          title: 'Titulo',
+          label1: 'Perg1(string):',
+          inputType1: 'string',
+          label2: 'Perg2(numero):',
+          inputType2: 'number',
+          buttonLabel: 'Calcular',
+          functionCall: 'template()'
+        }
+      ]
+
+      const inputsX = datatemplate.map((item) => {
+        return `
+        <h1>${item.title}</h1>
+        <form>
+          <label for="input">${item.label1}</label>
+          <input type="${item.inputType1}" id="input1" name="input1" required>
+            <br>
+          <label for="input">${item.label2}</label>
+          <input type="${item.inputType2}" id="input2" name="input2" required>
+            <br>
+          <button type="button" onclick="${item.functionCall}">${item.buttonLabel}</button>
+        </form>
+          `;
+      }).join('');
+
+      content = `
+          <div id='output'>
+            ${inputsX}
+          </div>
+          <div id="oo"></div>
+      `;
+break;
+
+execução em js
+function template() {
+  let String = document.getElementById("input1").value
+  let Number = Number(document.getElementById("input2").value)
+  let fim
+
+  const hdr = '<h2>Lorem</h2>'
+  const result = '<div id="output">'+ hdr +'<p>'+ fim + '.</p></div>'
+
+  document.getElementById("oo").innerHTML = result;
+}
+*/
